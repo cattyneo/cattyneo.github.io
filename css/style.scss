@@ -10,7 +10,6 @@
  *--------------------------------------------------*/
 
 // ベースカラー
-<<<<<<< HEAD
 $baseColor: hsl(240, 24%, 16%);//#10124a;
 
 // サブカラー
@@ -25,32 +24,12 @@ $fontColor: hsl(51, 64%, 98%);
 
 // font-family
 $baseFontFamily : Verdana, "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, "メイリオ", Meiryo, sans-serif;
-=======
-$baseColor: #1F1F33;//#10124a;
-
-// サブカラー
-$subColor: #202C40;
-
-// アクセントカラー
-$keyColor: #E6C105;
-
-// 文字色
-$fontColor: #fdfcf6;
-
-
-// font-family
-$baseFontFamily :"游ゴシック", YuGothic, "メイリオ",Verdana, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
->>>>>>> origin/master
 
 
 // ブレイクポイントの設定
 $breakpointLarge: "(min-width:768px)";
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 /*--------------------------------------------------
  *  共通
  *--------------------------------------------------*/
@@ -173,37 +152,22 @@ section {
     @include flex(1);
     margin: 10px 0;
     padding: 20px;
-<<<<<<< HEAD
     background-color: lighten($baseColor, 3%);
     //color: $baseColor;
     border-radius: 4px;
     box-sizing: border-box;
     box-shadow: inset 0 0px 1px 0px rgba(255,255,255,.4)
-=======
-    background-color: $baseColor;
-    //color: $baseColor;
-    @include border-radius(4px);
-    @include box-sizing(border-box);
->>>>>>> origin/master
   }
   i {
     width: 80px;
     height: 80px;
     margin-bottom: 5px;
     padding-top: 15px;
-<<<<<<< HEAD
     background-color: darken($keyColor, 5%);
     font-size: 4.5rem;
     color: #FFF;
     text-align: center;
     box-sizing: border-box;
-=======
-    background-color: $keyColor;
-    font-size: 4.5rem;
-    color: #FFF;
-    text-align: center;
-    @include box-sizing(border-box);
->>>>>>> origin/master
     @include border-radius(50%);
     @extend .block-center;
   }
@@ -296,11 +260,7 @@ section {
       font-size: 2.8rem;
       text-align: center;
       margin-right: 20px;
-<<<<<<< HEAD
       box-sizing: border-box;
-=======
-      @include box-sizing(border-box);
->>>>>>> origin/master
       vertical-align: top;
       &:last-child {
         margin-right: 0;
