@@ -11,16 +11,16 @@
  *--------------------------------------------------*/
 
 // ベースカラー
-$baseColor: hsl(240, 24%, 16%);//#10124a;
+$baseColor: hsl(236, 30%, 31%);
 
 // サブカラー
-$subColor: hsl(114, 35%, 39%);
+$subColor: hsl(240, 48%, 12%);
 
 // アクセントカラー
-$keyColor: hsl(50, 96%, 46%);
+$keyColor: hsl(50, 70%, 50%);
 
 // 文字色
-$fontColor: hsl(51, 64%, 98%);
+$fontColor: rgba(#fff, .85);
 
 
 // font-family
@@ -141,9 +141,9 @@ section {
 #skills {
   background-color: $subColor;
   .container {
-    @include display-flex;
+    display: flex;
     justify-content: space-between;
-    @include flex-direction(column);  // スキルボックスを縦に並べる
+    @include flex-direction(column);
   }
   h2 {
     color: $fontColor;
@@ -320,7 +320,7 @@ footer {
   // main > Skills
   #skills {
     .container {
-      @include flex-direction(row); // スキルボックスを横に並べる
+      flex-direction: row;
       justify-content: space-between;
     }
     .skill-box {
