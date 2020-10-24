@@ -1,0 +1,79 @@
+/*************** 共通 > グリッドシステム ***************
+*  .contents > .row の中にカラムを入れる
+*  .col-1 ~ .col-12       : 1/12 ~ 12/12のカラム幅
+*  .offset-1 ~ .offset-11 : 左側に間隔をあける
+*/
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    // sm 以上
+    @include mq-up(sm) {
+        width: 85%;
+        padding: 0;
+    }
+    // md 以上 lg 未満
+    @include mq-up(md) {
+        width: 90%;
+    }
+    // lg 以上
+    @include mq-up(lg) {
+        width: 80%;
+    }
+
+    // class="container full-width"
+    // 横幅いっぱいまで広げる
+    &.full-width {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+}
+
+/* md 以上でGrid有効 */
+@include mq-up(md) {
+    // column の間隔
+    $colSpan : 3%;
+
+    %col-common {
+        float: left;
+        margin-left: $colSpan;
+        @include box-sizing(border-box);
+    }
+    %col-child-common {
+        margin-left: 0;
+    }
+
+    // .col-x
+    @for $i from 1 through 12 {
+        .col-#{$i} {
+            @extend %col-common;
+            width: $i/12 * 100% - (12-$i)/12 * $colSpan;
+        }
+        .col-#{$i}:first-child {
+            @extend %col-child-common;
+        }
+    }
+    .col-12 { margin-left: 0; }
+
+    // .offset-x
+    @for $i from 1 through 11 {
+        .offset-#{$i}:first-child {
+            margin-left: $i/12 * 100% + $i/12 * $colSpan;
+        }
+        .offset-#{$i} {
+            margin-left: $i/12 * 100% + $i/12 * $colSpan + $colSpan;
+        }
+    }
+    .offset-0 {
+        margin-left: 0;
+    }
+    // 右寄せ
+    .pull-right {
+        float: right;
+    }
+}

@@ -1,0 +1,68 @@
+/*************** アニメーション ***************/
+@include keyframes(aniMove1) {
+    0% {
+      @include transform(rotate(45deg) skew(-15deg,-15deg) translate(0, 0));
+    }
+    50% {
+      @include transform(rotate(45deg) skew(-15deg,-15deg) translate(10px, 10px));
+    }
+    100% {
+      @include transform(rotate(45deg) skew(-15deg,-15deg) translate(0, 0));
+    }
+}
+@include keyframes(aniMove2) {
+    0% {
+      @include transform(rotate(45deg) skew(-15deg,-15deg) translate(0, 0));
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      @include transform(rotate(45deg) skew(-15deg,-15deg) translate(20px, 20px));
+      opacity: 0;
+    }
+}
+
+// 画像等が一瞬光るエフェクト
+@include keyframes(flash) {
+    0% {
+        opacity: .4;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@include mq-up(sm) {
+    .flash:hover {
+        @include animation(flash .8s ease-out);
+    }
+}
+
+// 震えるエフェクト
+@include keyframes(rumble) {
+    0%      {transform: rotate(0deg)    translate(0,0);}
+    12.5%   {transform: rotate(0.4deg)  translate(1px,-1px);}
+    25%     {transform: rotate(0.8deg)  translate(0px,1px);}
+    37.5%   {transform: rotate(0.4deg)  translate(-1px,0);}
+    50%     {transform: rotate(0deg)    translate(0,0);}
+    62.5%   {transform: rotate(-0.4deg) translate(1px,0);}
+    75%     {transform: rotate(-0.8deg) translate(0,1px);}
+    87.5%   {transform: rotate(-0.4deg) translate(-1px,-1px);}
+    100%    {transform: rotate(0deg)    translate(0,0);}
+}
+@include mq-up(sm) {
+    .rumble:hover {
+        @include animation(rumble 0.12s linear infinite);
+    }
+}
+
+// 明度を上げる
+@include mq-up(sm) {
+    .brighten {
+        transition: .15s ease-out;
+        &:hover {
+            @include filter(brightness(1.15));
+        }
+    }
+}

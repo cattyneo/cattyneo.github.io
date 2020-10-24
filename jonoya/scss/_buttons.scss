@@ -1,0 +1,81 @@
+// ボタンのデフォルトスタイル
+%btn {
+    display: block;
+    width: 100%;
+    max-width: 250px;
+
+    margin: 0 auto 5px auto;
+    padding: 15px;
+    border-style: none;
+
+    line-height: 1;
+    letter-spacing: .1em;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    font-size: 18px;
+    @include border-radius(10px);
+}
+// ボタンの左・右寄せ（lg: 1024px以上のみ。それ未満は中央寄せ）
+.btn-left {
+    // PC
+    @include mq-up(lg) {
+        float: left;
+    }
+}
+.btn-right {
+    // PC
+    @include mq-up(lg) {
+        float: right;
+    }
+}
+
+// ボタンのカスタムスタイル
+// class="btn-submit" のように設定し、.btn-submit に下記のmixinで個別設定
+@mixin btn-config($bgColor, $C_FONT) {
+    $borderColor : darken($bgColor, 20%); // 背景色に対するborderの色
+
+    background-color: $bgColor;
+    @include linkColors($C_FONT);
+    @include box-shadow(0 5px $borderColor);
+
+    // PC
+    @include mq-up(md) {
+        &:hover {
+            color: $C_FONT;
+            @include box-shadow(0 3px $borderColor);
+            @include transform(translateY(2px));
+        }
+    }
+    &:active {
+        color: $C_FONT;
+        @include box-shadow(0 1px $borderColor);
+        @include transform(translateY(4px));
+    }
+    &:disabled {
+        color: darken($C_FONT,20%);
+        background-color: $borderColor;
+        cursor: default;
+        @include box-shadow(none);
+        @include transform(translateY(5px));
+    }
+}
+
+// 送信ボタン
+.btn-submit {
+    @extend %btn;
+    @include btn-config($C_GREEN, #fff);
+}
+
+// 戻るボタン
+.btn-back {
+    @extend %btn;
+    @include btn-config(nth($gray, 3), #fff);
+}
+
+// 枠のみのボタン
+.btn-border {
+    @extend %btn;
+    @extend %defaultLinkColors;
+    border: solid 2px;
+}

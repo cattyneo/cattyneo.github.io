@@ -1,0 +1,199 @@
+// デフォルトのリンク色
+%defaultLinkColors {
+    // normal, hover, active, visited, focus
+    @include linkColors(
+        $C_LINK,
+        $C_LINK_H,
+        $C_LINK_A,
+        false,
+        false
+    );
+}
+
+// デフォルトの文書スタイル（Pタグ等）
+%defaultTextStyle {
+    //letter-spacing: 0.05em;
+    line-height: 1.7;
+}
+
+// デフォルトフォント
+%basefont {
+    font-family: $basefont;
+}
+// 可能な限り明朝体(Win7+)：タイトル等に
+%minchotitle {
+    font-family: $minchotitle;
+}
+// できれば明朝体(Win8+)：本文等に
+%minchodesc {
+    font-family: $minchodesc;
+}
+
+// カバー画像
+%cover-bg {
+    // 背景画像
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    position: relative;
+    width: 100%;
+}
+
+/*************** 共通タグ定義 ***************/
+
+*,*:after,*:before {
+    @include box-sizing(border-box);
+}
+html {
+    font-size: 62.5%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+body {
+    color: $C_FONT;
+    line-height: 1;
+    background: $background;
+    @extend %basefont;
+    @include fontsize($fontSize);
+    @include mq-down(md) {
+        @include fontsize($fontSizeSP);
+    }
+}
+html,body {
+    height: 100%;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    line-height: 1.5;
+    strong {
+        font-weight: inherit;
+    }
+}
+
+p {
+    @extend %defaultTextStyle;
+    margin: 0 0 15px 0;
+}
+em {
+    font-style: normal;
+    font-weight: normal;
+}
+a {
+    // normal, hover, active, visited, focus
+    @extend %defaultLinkColors;
+    text-decoration: none;
+    p > & {
+        text-decoration: underline;
+        padding: 0 .1em;
+        @include transition(0.1s ease-out);
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+// ul,li
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+}
+li {
+    margin: 0;
+    line-height: 1;
+    display: block;
+    @include fontsize($fontSize);
+    @include mq-down(md) {
+        @include fontsize($fontSizeSP);
+    }
+}
+
+// dl,dt,dd
+dl,dt,dd {
+    margin: 0;
+}
+
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    vertical-align: bottom;
+}
+
+small {
+    display: block;
+    font-size: 75%;
+}
+
+//----------------------------------------
+// form
+$col-form-main: $C_BASE_DK2;
+$col-form-key: $C_KEY_DK;
+
+label {
+    display: block;
+    margin-bottom: 15px;
+}
+input,
+textarea,
+button {
+    color: $C_FONT_FORM;
+    width: 100%;
+    margin: 0;
+    padding: .5em;
+
+    border-radius: 0;
+    -webkit-appearance: none;
+    outline: 0;
+    border: solid 1px $col-form-main;
+    box-shadow: none;
+    border-radius: 2px;
+}
+input,
+textarea {
+    @include fontsize(16px);
+    letter-spacing: 1px;
+
+    @include input-placeholder{
+        color: #ccc;
+    }
+    &:focus {
+        border: solid 1px $C_KEY;
+        box-shadow: 0 0 4px 1px $C_KEY;
+    }
+}
+input,
+button {
+    height: 2.5em;
+}
+textarea {
+    height: 7.5em;
+}
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+button {
+    color: #fff;
+
+    @include gradient(lighten($col-form-main,6%), $col-form-main, vertical);
+    // >= md
+    @include mq-up(md) {
+        &:hover {
+            @include gradient($col-form-main, lighten($col-form-main,6%), vertical);
+        }
+    }
+    &:active {
+        @include gradient(darken($col-form-main,6%), $col-form-main, vertical);
+    }
+}
+
+input[disabled],
+button[disabled] {
+    background: #999;
+    border: none;
+}

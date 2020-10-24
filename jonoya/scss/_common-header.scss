@@ -1,0 +1,320 @@
+// ヘッダー（ロゴ、電話、SPメニュー）
+#header {
+    z-index: 1000;
+    .icon-box {
+        margin-top: 20px;
+    }
+
+    // PC
+    @include mq-up(md) {
+        height: 120px;
+        padding: 15px 0;
+
+        @include gradient($C_MAIN_GDK, $C_MAIN_GLT, vertical, 70%);
+    }
+    // SP
+    @include mq-down(md) {
+        width: 100%;
+        height: 54px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: $C_MAIN;
+    }
+}
+// トップページのヘッダー上部とスライド部分の最大幅を拡大
+.is-home #header,
+#slides-area {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+// ヘッダーの左側・右側
+.header-left {
+    float: left;
+    font-size: 0;
+    //max-width: 55%;
+}
+.header-right {
+    float: right;
+    font-size: 0;
+}
+// キャッチフレーズ
+.phrase {
+    display: block;
+    color: $C_BASE_SD;
+    font-size: 13px;
+    line-height: 20px;
+    margin-bottom: 0;
+}
+// ロゴ
+.logo {
+    font-size: 0;
+    height: 70px;
+    // SP
+    @include mq-down(md) {
+        height: 35px;
+        margin-top: 10px;
+        //margin-left: 5px;
+        margin-left: 8px;
+    }
+}
+
+/*--------------------------------------------------------
+* SPナビゲーション #sp-menu, .sp-tel, .sp-map
+* 全ページ共通、上部に固定
+*---------------------------------------------------------*/
+
+// SP用メニューの配色
+$spMenuBack  : $C_MAIN;
+$spMenuFont  : #fff;
+$spMenuIcon  : #fff;
+$spMenuBorder: lighten($C_MAIN, 15%);
+
+// SP用電話ボタン、マップボタン
+.sp-tel,
+.sp-map {
+    float: left;
+    width: 44px;
+    height: 54px;
+    padding-top: 7px;
+
+    color: $spMenuIcon;
+    @include linkColors($spMenuIcon, $spMenuIcon, $spMenuIcon);
+    border-left: solid 1px $spMenuBorder;
+    font-size: 26px;
+    text-align: center;
+    //-webkit-tap-highlight-color: rgba(0,0,0,0); // タップ時の黒い半透明を無効
+    small {
+        margin-top: 2px;
+        font-size: 11px;
+        text-transform: uppercase;
+    }
+}
+
+// SPメニュー
+#sp-menu {
+    display: none;// spも最初は隠す
+    width: 100%;
+
+    position: fixed;
+    z-index: 9999;
+    top: 54px;
+    right: 0;
+
+    text-align: center;
+    box-shadow: 5px 5px 5px rgba(0,0,0,.18);
+    @include transform(translate3d(0, 0, 0));// Mobile Safari にてGPUの描画を許可
+
+    li > a {
+        display: block;
+        height: 50px;
+        line-height: 50px;
+        color: $spMenuFont;
+        @include bg-rgba($spMenuBack,.9);
+
+        border-top: solid 1px $spMenuBorder;
+    }
+    li:last-child > a {
+        border-bottom: solid 1px $spMenuBorder;
+        //border-radius: 0 0 3px 3px;
+    }
+}
+
+// SP用メニューボタン
+#sp-menu-btn {
+    float: left;
+
+    overflow: visible;
+    width: 54px;
+    height: 54px;
+    line-height: 54px;
+    border-left: solid 1px $spMenuBorder;
+    -webkit-tap-highlight-color: rgba(0,0,0,0); // タップ時の黒い半透明を無効
+
+    // 構成要素共通
+    &,
+    & .inner,
+    & span {
+        display: block;
+        @include box-sizing(border-box);
+        @include transition(all .3s);
+    }
+    & .inner {
+        position: relative;
+        height: 36px;
+        width: 33px;
+        margin: 11px auto 7px;
+    }
+    /* 3本線 */
+    & span {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $spMenuIcon;
+        border-radius: 2px;
+    }
+    & span.bar1 {
+        top: 0;
+    }
+    & span.bar2 {
+        top: 8px;
+    }
+    & span.bar3 {
+        top: 16px;
+    }
+    /* Menu の文字 */
+    & .mtext {
+        width: 100%;
+        margin: 0;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        color: $spMenuIcon;
+        font-size: 11px;
+        line-height: 1;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    /* アニメーション */
+    /*&.open {
+        border-left: solid 1px $spMenuBorder;
+    }*/
+    &.open span.bar1 {
+        @include transform(translateY(10px) rotate(-45deg));
+    }
+    &.open span.bar2 {
+        opacity: 0;
+    }
+    &.open span.bar3 {
+        @include transform(translateY(-6px) rotate(45deg));
+    }
+}
+
+// SPメニュー分の上マージン
+@include mq-down(md) {
+    // トップページはスライドの上に
+    // トップページ以外はメインコンテンツの上に
+    .is-home #slides-area,
+    .is-page #content {
+        margin-top: 54px;
+    }
+
+}
+
+/*--------------------------------------------------------
+* スライダー #slides-area
+* トップページのみ、SPでは幅いっぱいに表示
+*---------------------------------------------------------*/
+
+/* slideImgPos() スライド画像の高さ調整
+*  margin-top: -p/a% + h/2px
+*  p: 画像の表示位置。画像の上から何％の位置が表示領域の中央に来るか（0～1、0.5で中央）
+*  a: 画像アス比
+*  h: 表示領域高さ
+*/
+@mixin slideImgPos($aspect, $height, $position:0.5) {
+    @include calc(margin-top, percentage(- $position / $aspect)'+'$height/2);
+}
+
+#slides-area {
+    background-color: $C_MAIN;
+    font-size: 0;
+    overflow: hidden;
+
+    .slick-slide img {
+        max-height: none;
+    }
+    // >= md
+    @include mq-up(md) {
+        height: 495px;
+        padding-top: 15px;
+
+        .slick-list {
+            border-radius: 10px;
+            height: 480px; // 高さ固定
+        }
+        .slick-slide img {
+            position: absolute;
+            margin-top: 0; // for IE8
+            @include slideImgPos(4/3, 480px, 0.5);
+            // >= lg
+            @include mq-up(lg) {
+                margin-top: -10%;
+                //@include slideImgPos(4/3, 480px, 0.4);
+            }
+        }
+    }
+}
+
+/*--------------------------------------------------------
+* PCメニュー #pc-menu
+* 全ページ共通、上部に固定
+*---------------------------------------------------------*/
+
+// PCメニュー
+#pc-menu {
+    $col-menu   : desaturate($C_BASE, 20%);
+    $col-small  : darken(desaturate($C_BASE, 50%), 25%);
+    display: block;
+    width: 100%;
+    background-color: $C_MAIN;
+    box-shadow: 0 3px 3px rgba($C_MAIN, .23);
+
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    @include transform(translate3d(0, 0, 0));// Mobile Safari にてGPUの描画を許可
+
+    li {
+        float: left;
+        width: 16.666667%;
+        font-size: 0;
+        //background: image-url('button-gnav.png') no-repeat center/100%;
+        text-shadow: 0 -1px $C_MAIN_DK;
+
+        a {
+            display: block;
+            height: 70px;
+            padding: 17px 0;
+
+            //color: desaturate($C_BASE_SD, 15%);
+            color: $col-menu;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: .05em;
+            @include hoverLine($C_KEY, false, 2px, 6px);
+
+            /*@include transition(color 0.3s ease-out);
+            &.active, &:hover {
+                color: $col-menu;
+            }*/
+
+            span {
+                display: block;
+                font-size: 16px;
+                line-height: 16px;
+                margin-bottom: 8px;
+            }
+            small {
+                color: $col-small;
+                font-size: 12px;
+                line-height: 12px;
+            }
+            // 幅の狭いPC
+            @include mq-down(lg) {
+                span {
+                    font-size: 13px;
+                }
+                small {
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+}
+.is-fixed {
+    position: fixed;
+}

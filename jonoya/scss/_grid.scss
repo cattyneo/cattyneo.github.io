@@ -1,0 +1,78 @@
+/*************** 共通 > グリッドシステム ***************
+* xs: ~479px
+* sm: 480~767px
+* md: 768~1023px
+* lg: 1024~1199px
+* xl: 1200px~
+*
+* col-x
+* offset-x
+* push-x
+* pull-x
+*/
+
+.container,
+.row {
+    @include clearfix();
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 ($grid-gutter / 2);
+
+    // sm 以上
+    @include mq-up(sm) {
+        width: 85%;
+        padding: 0;
+    }
+    // md 以上 lg 未満
+    /*@include mq-up(md) {
+        width: 90%;
+    }*/
+    // lg 以上
+    @include mq-up(lg) {
+        width: 80%;
+    }
+}
+
+// 一定幅以下で横幅いっぱいに広げる
+@include responsive-down('.container.full') {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+// md 以上でグリッドシステム有効
+@include mq-up(md) {
+    .row {
+        margin-right: ($grid-gutter / -2);
+        margin-left: ($grid-gutter / -2);
+    }
+
+    %col-common {
+        float: left;
+        position: relative;
+        min-height: 1px; // Prevent collapsing
+        padding-right: ($grid-gutter / 2);
+        padding-left:  ($grid-gutter / 2);
+    }
+    @for $i from 1 through 12 {
+        .col-#{$i} {
+            @extend %col-common;
+            width: percentage($i / 12);
+        }
+        .offset-#{$i} {
+            margin-left: percentage($i / 12);
+        }
+        .push-#{$i} {
+            left: percentage($i / 12);
+        }
+        .pull-#{$i} {
+            right: percentage($i / 12);
+        }
+    }
+}

@@ -1,0 +1,248 @@
+/*************** Tableレイアウト ***************
+* <div class="table-group">
+*   <div class="form-error">エラーメッセージ</div>
+*
+*   <ul class="path">
+*     <li class="current">入力</li><li>確認</li><li>送信</li>
+*   </ul>
+*
+*   <table class="table">
+*     <tr>
+*       <th>タイトル</th>
+*       <td>中身</td>
+*     </tr>
+*     <tr>
+*       <th>タイトル</th>
+*       <td>中身</td>
+*     </tr>
+*   </table>
+*
+*   <div class="table-foot">
+*     ボタンなどを配置
+*   </div>
+* </div>
+*/
+$borderColor : nth($gray, 2); // 枠線
+
+$thBG    : nth($gray, 1);
+$thColor : $C_FONT;
+
+$tdBG    : #fff;
+$tdColor : $C_FONT;
+
+.table-group {
+    margin-top: 30px;
+    margin-bottom: 60px;
+
+    .form-error {
+        color: $C_RED;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    // 入力→確認→送信完了
+    .path {
+        margin-bottom: 15px;
+        text-align: left;
+        // SP
+        @include mq-down(md) {
+            text-align: center;
+        }
+        li {
+            display: inline-block;
+            position: relative;
+            padding: 10px;
+            color: #fff;
+            background-color: nth($gray, 3);
+            @include fontsize(14px);
+            @include border-radius(8px);
+            &.current {
+                background-color: $C_GREEN;
+            }
+        }
+        li + li {
+            margin-left: 35px;
+        }
+        li + li:before {
+            //@include fontawesome('\f105');
+            //@include fontsize(32px);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -23px;
+            margin: auto;
+            color: nth($gray, 4);
+        }
+        .current:after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -14px;
+            margin: auto;
+            border: {
+                top: solid 8px $C_GREEN;
+                left: solid 8px transparent;
+                right: solid 8px transparent;
+                bottom: solid 8px transparent;
+            }
+        }
+    }
+
+    // テキストフィールド
+    .textfield {
+        margin-bottom: 15px;
+        padding: 20px;
+        border: solid 1px $borderColor;
+
+        @include fontsize(15px);
+        background-color: $tdBG;
+        color: $tdColor;
+    }
+
+    // テーブルの下（送信ボタン等）
+    .table-foot {
+        width: 100%;
+        padding: 15px;
+        border-left: solid 1px $borderColor;
+        border-right: solid 1px $borderColor;
+        border-bottom: solid 1px $borderColor;
+
+        background: $tdBG;
+        color: $tdColor;
+        text-align: center;
+        @extend .clearfix;
+        // SP
+        @include mq-down(md) {
+            border-top: solid 1px $borderColor;
+        }
+    }
+}
+// テーブル
+.table {
+    display: table;
+    width: 100%;
+
+    line-height: 1.8;
+    table-layout: fixed; // テーブルの幅を手動設定
+    border-collapse: collapse;
+
+    tbody > tr {
+      display: table-row;
+
+        // 1行目の上の線
+        &:first-child > th {
+            border-top: solid 4px $C_MAIN;
+        }
+        &:first-child > td {
+            border-top: solid 4px nth($gray, 3);
+            // SP
+            @include mq-down(md) {
+              border-top: none;
+            }
+        }
+
+        // タイトル
+        & > th {
+            display: table-cell;
+            width: 11em;
+
+            margin: 0;
+            padding: 12px;
+            border-left: solid 1px $borderColor;
+            border-bottom: solid 1px $borderColor;
+
+            background: $thBG;
+            color: $thColor;
+            text-align: left;
+            font-weight: normal;
+            vertical-align: middle;
+
+            // 必須、任意マークがついている場合の幅
+            &.required, &.optional {
+              width: 13.5em;
+            }
+            // SP
+            @include mq-down(md) {
+                display: block;
+                width: 100% !important; // SPでは必ず幅100%
+                border-left: none;
+            }
+        }
+        // 中身
+        & > td {
+            display: table-cell;
+
+            margin: 0;
+            padding: 12px;
+            border-bottom: solid 1px $borderColor;
+            border-right: solid 1px $borderColor;
+
+            background: $tdBG;
+            color: $tdColor;
+            text-align: left;
+            vertical-align: middle;
+            letter-spacing: .06em;
+            &.large {
+                letter-spacing: 2px;
+                font-weight: bold;
+                @include fontsize(16px);
+            }
+            // SP
+            @include mq-down(md) {
+                display: block;
+                width: 100% !important; // SPでは必ず幅100%
+                border-left: solid 1px $borderColor;
+                margin-bottom: 15px;
+            }
+        }
+    }
+}
+
+// 必須、任意
+%mark {
+    float: right;
+    padding: 3px 7px;
+    color: #fff;
+    @include fontsize(12px);
+    @include border-radius(8px);
+    // SP
+    @include mq-down(md) {
+        float: left;
+        margin-right: 8px;
+    }
+}
+.required:after {
+    content: "必須";
+    background-color: $C_RED;
+    @extend %mark;
+}
+.optional:after {
+    content: "任意";
+    background-color: nth($gray, 3);
+    @extend %mark;
+}
+
+// チェックマーク（OK）
+.check-ok {
+    display: block;
+    position: relative;
+    margin-top: 0;
+    padding-left: 50px;
+    padding-bottom: 8px;
+    border-bottom: solid 2px $borderColor;
+    line-height: 1.5;
+    text-align: left;
+    &:before {
+        //@include fontawesome('\f00c');
+        //@include fontsize(40px);
+        position: absolute;
+        top: -5px;
+        left: 5px;
+        color: $C_GREEN;
+        line-height: 1;
+    }
+}

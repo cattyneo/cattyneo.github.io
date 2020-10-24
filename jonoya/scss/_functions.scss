@@ -1,0 +1,233 @@
+// clearfix
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+    & {
+        *zoom: 1;
+    }
+}
+
+// メディアクエリ
+@mixin mq-up($bp) {
+    @media screen and (min-width: #{map-get($breakpoints, $bp)}) {
+        @content;
+    }
+}
+@mixin mq-down($bp) {
+    @media screen and (max-width: #{map-get($breakpoints, $bp) - 1px}) {
+        @content;
+    }
+}
+
+// レスポンシブ対応のクラスを生成
+// ブレークポイントより広い場合と、狭い場合
+// .class, .class-xs, .class-sm, .class-md, .class-lg, .class-xl
+// 通常は「up」を利用する
+@mixin responsive-up($class) {
+    #{$class} {
+        @content;
+    }
+    @each $bp in map-keys($breakpoints) {
+        @include mq-up($bp) {
+            #{$class}-#{$bp} {
+                @content;
+            }
+        }
+    }
+}
+@mixin responsive-down($class) {
+    #{$class} {
+        @content;
+    }
+    @each $bp in map-keys($breakpoints) {
+        @include mq-down($bp) {
+            #{$class}-#{$bp} {
+                @content;
+            }
+        }
+    }
+}
+
+// フォントサイズ指定で rem と px を併記する関数
+// ex) include fontsize(16px); -> font-size: 16px; font-size: 1.6rem;
+@mixin fontsize($size) {
+    $base: 10px;
+    font-size: $size;
+    font-size: ($size / $base) * 1rem;
+}
+
+// rgba IE8でも透過が必要な場合
+// bg-rgba(#rrggbb, alpha) or bg-rgba(r, g, b, a)
+@mixin bg-rgba($r, $g, $b: false, $a: false) {
+    $rgba  : if( $b==false and $a==false,
+        rgba($r,$g),
+        rgba($r,$g,$b,$a)
+    );
+    $ieHex : ie-hex-str($rgba);
+
+    background-color: $rgba;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ieHex},endColorstr=#{$ieHex});
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ieHex},endColorstr=#{$ieHex})";
+    zoom: 1;
+
+    &:not(:target){
+        filter: none;
+    }
+}
+
+// ボックスの中央寄せ
+@mixin boxCenter() {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+// ブロック要素を上下中央寄せ
+@mixin boxMiddle() {
+    position: relative;
+    top: 50%;
+    @include transform(translateY(-50%));
+}
+
+// link-colorsのレスポンシブ対応版（SPでは無効）
+// normal, hover, active, visited, focus
+@mixin linkColors($normal, $hover: false, $active: false, $visited: false, $focus: false) {
+    @include link-colors($normal, $normal, $active, $visited, $focus);
+    // PC
+    @include mq-up(md) {
+        @include link-colors($normal, $hover, $active, $visited, $focus);
+    }
+}
+
+// Retina対応画像の切り替え
+@mixin imgRetina($image, $extension, $width, $height) {
+    background: url($image + '.' + $extension) no-repeat;
+    width: $width;
+    height: $height;
+
+    @media (min--moz-device-pixel-ratio: 2),
+        (-o-min-device-pixel-ratio: 2/1),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-device-pixel-ratio: 2),
+        (min-resolution: 2dppx) {
+            background: url($image + '@2x' + '.' + $extension) no-repeat;
+            background-size: $width $height;
+    }
+}
+
+// 影のエフェクト
+@function shadowEffect($alpha: 1, $shadowCol : #000) {
+    @return
+    0px 0px 4px rgba(lighten($shadowCol,20%), $alpha*0.5),
+    0px 0px 8px rgba(lighten($shadowCol,10%), $alpha*0.75),
+    0px 0px 12px rgba(lighten($shadowCol,0%), $alpha);
+}
+
+// hoverするとリンクの下に線を表示
+@mixin hoverLine($color, $shadowCol:false, $height:4px, $bottom:0px) {
+    position: relative;
+    &:before {
+        content: "";
+        display: block;
+        height: $height;
+        width: 0%;
+
+        position: absolute;
+        left: 50%;
+        right: 50%;
+        bottom: $bottom;
+
+        background: $color;
+        background: linear-gradient(
+            to right,
+            rgba($color, 0),
+            $color 50%,
+            rgba($color, 0)
+        );
+        @include transition(0.2s ease-out);
+        @if $shadowCol!=false {
+            @include box-shadow(shadowEffect(.4, $shadowCol));
+        }
+    }
+    // PC
+    @include mq-up(md) {
+        &:hover:before {
+            width: 90%;
+            left: 5%;
+            right: 5%;
+        }
+    }
+    &.active:before {
+        width: 90%;
+        left: 5%;
+        right: 5%;
+    }
+}
+
+// グラデーション
+// $start:  開始色
+// $end:    終了色
+// $direction:   vertical or horizontal
+// $mid-position:   中間色をスライドさせる場合の位置(%)
+@mixin gradient($start, $end, $direction: vertical, $mid-position: false, $mid-col: mix($start, $end)){
+
+    //$mid-col: mix($start, $end); // 中間色
+
+    $angles-horizontal: // 上→下方向での方向設定
+            horizontal,
+            0% 50%,
+            100% 50%,
+            left,
+            to right;
+    $angles-vertical: // 左→右方向での方向設定
+            vertical,
+            50% 0%,
+            50% 100%,
+            top,
+            to bottom;
+    $angles : if(
+        $direction == horizontal,
+        $angles-horizontal,
+        $angles-vertical
+    );
+
+    background: $mid-col; // フォールバック
+
+    @if ($mid-position == false) {
+        // 通常のグラデーション
+        @include filter-gradient($start, $end, nth($angles,1));
+        //@include background-image(linear-gradient(left, $start 0%, $end 100%));
+        background: -webkit-gradient(linear, nth($angles,2), nth($angles,3),
+                          color-stop(0%, $start), color-stop(100%, $end));
+        //background: -moz-linear-gradient(nth($angles,4), $start, $end);
+        background: -webkit-linear-gradient(nth($angles,4), $start, $end);
+        background: linear-gradient(nth($angles,5), $start, $end);
+    } @else {
+        // 中間色を指定位置にスライド
+        @include filter-gradient($start, $end, nth($angles,1));
+        //@include background-image(linear-gradient(left, $start 0%, $end 100%));
+        background: -webkit-gradient(linear, nth($angles,2), nth($angles,3),
+                          color-stop(0%, $start), color-stop($mid-position, $mid-col), color-stop(100%, $end));
+        //background: -moz-linear-gradient(nth($angles,4), $start, $mid-col $mid-position, $end);
+        background: -webkit-linear-gradient(nth($angles,4), $start, $mid-col $mid-position, $end);
+        background: linear-gradient(nth($angles,5), $start, $mid-col $mid-position, $end);
+    }
+}
+
+// calc
+// ex) @include calc(width, 10% - 100px);
+@mixin calc($property, $expression) {
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+@mixin tap-highlight() {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); // タップ時の黒い半透明を無効
+    cursor:pointer;
+}

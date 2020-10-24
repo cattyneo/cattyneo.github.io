@@ -1,0 +1,149 @@
+/*--------------------------------------------------------
+* Sidebar
+*---------------------------------------------------------*/
+
+/*************** Sidebar > サイドバナー ***************/
+.side-banners {
+    margin-bottom: 10px;
+    @extend .clearfix;
+}
+
+.bn-aside {
+    margin-bottom: 10px;
+    // SP
+    @include mq-down(md) {
+        margin-bottom: 4%;
+        // 奇数番目は左寄せ、偶数番目は右寄せ
+        &:nth-child(odd) {
+            float: left;
+        }
+        &:nth-child(even) {
+            float: right;
+        }
+    }
+}
+
+// サイドバナー
+.bn-hover {
+    z-index: 100;
+    overflow: hidden;
+    position: relative;
+    min-width: 100%;
+    background-color: #fff;
+    @include mq-down(md) {
+        width: 48%;
+        min-width: auto;
+    }
+
+    .bn-img {
+        z-index: 200;
+        display: block;
+        width: 100%;
+        height: 100%;
+        @include backface-visibility(hidden); // ズレなくなるおまじない
+        @include transition(0.2s ease-in-out);
+        @include transform(scale(1)); // 拡大
+    }
+    .bn-caption {
+        z-index: 300;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 5%;
+        // 文字
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+
+        @include backface-visibility(hidden); // ズレなくなるおまじない
+        @include transition(0.2s ease-in-out);
+        //@include opacity(0)
+        @include bg-rgba(nth($gray, 5), 0); // 透明化
+    }
+    .bn-link {
+        z-index: 400;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    // PC
+    @include mq-up(md) {
+        &:hover {
+            .bn-img {
+                transform: scale(1.1);
+            }
+            .bn-caption {
+                //@include opacity(0.4)
+                @include bg-rgba(nth($gray, 5), 0.4); // 透明化
+            }
+        }
+    }
+}
+
+/*************** Sidebar > サイドメニュー ***************/
+.side-links {
+    $menuHeight : 50px;
+    @extend %basefont;
+
+    .side-title {
+        height: $menuHeight;
+        line-height: $menuHeight;
+        font-weight: normal;
+
+        margin: 0;
+        padding-left: 20px;
+        background-color: $C_MAIN;
+
+        @include fontsize(15px);
+        color: #fff;
+    }
+    li {
+        display: block;
+        height: $menuHeight;
+        position: relative;
+        margin: 1px 0 0 0;
+
+        a {
+            display: block;
+            height: 100%;
+            padding-left: 20px;
+
+            line-height: $menuHeight;
+            color: $C_FONT;
+            @include fontsize(15px);
+            @include bg-rgba(#fff, 0.75);
+
+            // 右端の > マーク
+            &:after {
+                //@include fontawesome('\f105');
+                //@include fontsize(24px);
+
+                position: absolute;
+                top: -2px;
+                right: 20px;
+
+                line-height: $menuHeight;
+                color: nth($gray, 3);
+            }
+
+            // PC
+            @include mq-up(md) {
+                // hover時
+                &:hover {
+                    color: $C_MAIN;
+                    background-color: lighten($C_MAIN, 50%);
+                    &:after {
+                        color: $C_MAIN;
+                    }
+                }
+            }
+        }
+    }
+}

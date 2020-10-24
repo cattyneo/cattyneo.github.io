@@ -1,0 +1,248 @@
+/******************************************************************
+* 円アイコンとテキスト（ヘッダー、フッター、ボタン）
+* ヘッダー
+    <div class="tel-box icon-box pc-only">
+        <div class="icon-circle">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+        </div>
+        <div class="icon-text">
+            <span>ご質問・ご相談はお気軽に</span>
+            <img src="img/tel-light.png" alt="<?php echo TEL_HYP_JS; ?>">
+            <span>受付時間 10:00-22:00</span>
+        </div>
+    </div>
+
+* ボタン
+    <!-- tel-box -->
+    <a class="tel-box icon-box-button" href="tel:<?php echo TEL_NUM_JS; ?>">
+        <div class="icon-circle">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+        </div>
+        <div class="icon-text">
+            <img class="pc-only" src="img/tel-dark.png" alt="<?php echo TEL_HYP_JS; ?>">
+            <img class="sp-only" src="img/tel-light.png" alt="<?php echo TEL_HYP_JS; ?>">
+            <span>受付時間 10:00-22:00</span>
+        </div>
+    </a>
+
+    <!-- mail-box -->
+    <a class="mail-box icon-box-button" href="contact.php">
+        <div class="icon-circle">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+        </div>
+        <div class="icon-text">
+            <span class="mail-1">お問い合わせフォーム</span>
+            <span class="mail-2">24時間受付</span>
+        </div>
+    </a>
+    </div>
+*******************************************************************/
+
+// 円アイコンとテキスト
+$icon-circle-size   : 68px; // 円アイコンのサイズ
+$icon-circle-button : 55px; // ボタンタイプの場合のアイコンサイズ
+$icon-circle-small  : 20px;
+
+$icon-box-width     : 290px;
+$icon-text-width    : image-width('tel-light.png') / 2;
+
+// 円マークに対するアイコンサイズ
+$tel-reduct         : 0.70;
+$mail-reduct        : 0.58;
+
+// .icon-box
+.icon-box {
+    display: block;
+    font-size: 0;
+    #header & {
+        margin-top: 20px;
+    }
+}
+.icon-circle {
+    // 円とアイコン
+    display: inline-block;
+    vertical-align: top;
+    width: $icon-circle-size;
+    height: $icon-circle-size;
+    border-radius: 50%;
+    text-align: center;
+    .fa {
+        //font-size: 48px;
+        line-height: $icon-circle-size;
+        position: relative;
+    }
+}
+.icon-text {
+    // 右側テキスト
+    // 電話番号と「ご質問・ご相談はお気軽に」など
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 7px;
+    font-size: 13px;
+    text-align: left;
+    span {
+        display: block;
+        letter-spacing: .05em;
+    }
+    img {
+        display: block;
+        width: $icon-text-width;
+        margin: 5px 0 7px 0;
+    }
+}
+
+// .icon-box-button 幅狭目のボタン
+.icon-box-button {
+    @extend .icon-box;
+
+    width: $icon-box-width;
+    display: inline-block;
+    padding: 8px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    .icon-circle {
+        width: $icon-circle-button;
+        height: $icon-circle-button;
+        .fa {
+            //font-size: 36px;
+            line-height: $icon-circle-button;
+        }
+    }
+
+    // >= md
+    @include mq-up(md) {
+        padding: 16px;
+
+        margin-right: 20px;
+        &:last-of-type {
+            margin-right: 0;
+        }
+        .icon-circle {
+            margin-bottom: 8px;
+        }
+        .icon-text {
+            font-size: 18px;
+            margin-left: 0;
+            img {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+// 色設定
+$col-shadow : saturate(darken($C_MAIN_LT, 15%), 20%);
+.icon-box,
+.icon-box-button {
+    .icon-circle {
+        color: $C_MAIN_LT;
+        background: $C_BASE_LT;
+    }
+    .icon-text {
+        color: $C_BASE_LT;
+    }
+}
+.icon-box-button {
+    background: $C_MAIN_LT;
+    box-shadow: 0 6px $col-shadow;
+}
+
+// 個別設定
+.tel-box {
+    .fa {
+        top: 2px;
+        font-size: round( $icon-circle-size * $tel-reduct / 2 ) * 2;
+    }
+    &.icon-box-button {
+        .fa {
+            font-size: round( $icon-circle-button * $tel-reduct / 2 ) * 2;
+        }
+        // >= md 電話NGの場合
+        @include mq-up(md) {
+            padding: 14px;
+            border: solid 2px $C_MAIN_LT;
+            background: transparent;
+            box-shadow: none;
+            cursor: default;
+
+            .icon-circle {
+                color: $C_BASE;
+                background: $C_MAIN_LT;
+            }
+            .icon-text {
+                color: $C_MAIN_LT;
+            }
+        }
+    }
+}
+.mail-box {
+    .fa {
+        top: 0px;
+        font-size: round( $icon-circle-size * $mail-reduct / 2 ) * 2;
+    }
+    &.icon-box-button {
+        .fa {
+            font-size: round( $icon-circle-button * $mail-reduct / 2 ) * 2;
+        }
+        // ボタン風の動作
+        // >= md
+        @include mq-up(md) {
+            position: relative;
+            top: -6px;
+            &:hover {
+                //color: $C_FONT;
+                box-shadow: 0 4px $col-shadow;
+                @include transform(translateY(2px));
+            }
+            &:active {
+                //color: $C_FONT;
+                box-shadow: 0 1px $col-shadow;
+                @include transform(translateY(5px));
+            }
+        }
+    }
+    .mail-1 {
+        font-size: 24px;
+        line-height: 37px;
+        letter-spacing: 0;
+        font-weight: bold;
+        text-align: left;
+        // < md
+        @include mq-down(md) {
+            width: $icon-text-width;
+            margin-top: 2px;
+            font-size: 21px;
+        }
+    }
+    .mail-2 {
+        text-align: center;
+    }
+}
+
+// footer
+// 電話番号
+.footer-icon-box {
+    margin-bottom: 30px;
+    // < md
+    @include mq-down(md) {
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+    // >= md, < lg
+    @include mq-down(lg) {
+        .icon-circle {
+            width: 65px;
+            height: 65px;
+            .fa {
+                font-size: 46px;
+                line-height: 65px;
+            }
+        }
+        .icon-text {
+            font-size: 13px;
+            img {
+                width: image-width('tel-light.png') / 2 * 0.9;
+            }
+        }
+    }
+}

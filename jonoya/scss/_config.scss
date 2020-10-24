@@ -1,0 +1,69 @@
+
+$graceful-usage-threshold: 1;
+$critical-usage-threshold: 0.1;
+
+/*************** フォント ***************/
+
+// フォント
+$basefont    : "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro","メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+$minchotitle : "ヒラギノ明朝 ProN W3","Hiragino Mincho Pro","游明朝","Yu Mincho","HG明朝E","メイリオ",Meiryo,"ＭＳ Ｐ明朝","MS PMincho",serif;
+$minchodesc  : "ヒラギノ明朝 ProN W3","Hiragino Mincho Pro","游明朝","Yu Mincho","メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+
+// デフォルトのフォントサイズ
+$fontSize   : 18px;
+$fontSizeSP : 15px;
+
+
+/*************** 色 ***************/
+$gray : (
+    #f2f2f2, // nth($gray, 1)
+    #e3e3e3, // nth($gray, 2)
+    #b3b3b3, // nth($gray, 3)
+    #777,    // nth($gray, 4)
+    #333,    // nth($gray, 5)
+) !default;
+
+$C_BASE     : hsl( 51, 63%, 92%);//hsl( 44, 63%, 92%);   // 70% 背景色
+$C_BASE_LT  : hsl( 43, 59%, 69%);   // 暗いところで目立たせる色
+$C_BASE_SD  : hsl( 40, 26%, 60%);   // 目立たせない色
+$C_BASE_DK  : hsl( 43, 39%, 34%);   // 暗めの色
+$C_BASE_DK2 : hsl( 43, 24%, 34%);   // 暗めの色 低彩度
+$C_BASE_2   : hsl( 43, 45%, 89%);   // メイン背景と区別する背景
+
+$C_MAIN     : hsl(  7, 18%, 18%);   // 25% サイトのメインとなる色
+$C_MAIN_LT  : hsl(  7, 17%, 32%);   // やや明るい
+$C_MAIN_DK  : hsl(  7, 18%, 13%);   // 一番暗い
+$C_MAIN_GDK : hsl(  4, 18%, 16%);   // グラデーション（暗）
+$C_MAIN_GLT : hsl(  4, 18%, 32%);   // グラデーション（明）
+
+$C_KEY      : hsl( 44,100%, 62%);   // 5% アクセントカラー
+$C_KEY_DK   : hsl( 44,100%, 42%);   // 明るい背景に配置する場合
+
+$C_GREEN    : hsl(101, 43%, 49%);   // #69b347 ボタン等の緑色
+$C_RED      : hsl(  0, 76%, 49%);   // #E64545 「必須」などの赤色
+
+// フォントの色
+$C_FONT         : #333;
+$C_FONT_FORM    : $C_FONT;
+
+// リンク色、Hover, Active
+$C_LINK         : $C_BASE_DK;
+$C_LINK_H       : lighten($C_LINK, 10%);
+$C_LINK_A       : darken($C_LINK, 5%);
+
+/*************** その他 ***************/
+
+// body要素の背景設定
+$background : $C_BASE image-url('bg.png');
+
+// ブレークポイント
+$breakpoints: (
+    xs: 0px,  // xs: ~479px
+    sm: 480px,  // sm: 480~767px
+    md: 768px,  // md: 768~1023px
+    lg: 1024px, // lg: 1024~1199px
+    xl: 1200px, // xl: 1200px~
+) !default;
+
+// グリッドシステムの溝
+$grid-gutter: 30px;

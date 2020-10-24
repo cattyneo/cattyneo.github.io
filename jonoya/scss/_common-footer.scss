@@ -1,0 +1,263 @@
+/*--------------------------------------------------------
+* Footer
+*---------------------------------------------------------*/
+
+// 上へ戻る
+#page-top {
+    font-size: 34px;
+    color: $C_BASE;
+    text-align: center;
+
+    // >= md 円の背景で画面右下に固定
+    @include mq-up(md) {
+        position: fixed;
+        z-index: 9999;
+        right: 15px;
+        bottom: 15px;
+        width: 60px;
+        height: 60px;
+
+        background: $C_MAIN_LT;
+        border-radius: 50%;
+        line-height: 60px;
+
+        // ホバーで透明度変化
+        @include transition(0.2s ease-out);
+        @include opacity(0.8);
+        box-shadow: 0px 2px 10px rgba(0,0,0,.3),
+                    0px 0px 1px rgba(0,0,0,.1);
+        &:hover {
+            @include opacity(1);
+            box-shadow: 0px 5px 5px rgba(0,0,0,.2),
+                        0px 10px 14px rgba(0,0,0,.1);
+        }
+        // fontawesomeの位置調整
+        &:before {
+            position: relative;
+            top: -1px;
+        }
+    }
+
+    // < md フッターナビに固定
+    @include mq-down(md) {
+        //display: none;
+        width: 48px;
+        line-height: 48px;
+        margin: 0 auto 15px auto;
+        color: $C_BASE_SD;
+    }
+}
+
+$footer-fontsize: 14px;
+#footer {
+    @include fontsize($footer-fontsize);
+}
+
+// footerに配置するパーツの間隔
+.footer-item {
+    margin-bottom: 30px;
+}
+
+//----------------------------------------
+// フッター上部
+.footer-top {
+    padding: 80px 0;
+    @include gradient($C_MAIN_GDK, $C_MAIN_GLT, horizontal, 67%);
+    // < md
+    @include mq-down(md) {
+        padding: 50px 0;
+    }
+}
+
+// 左側 .footer-top-l
+// 右側 .footer-top-r
+.footer-top-l {
+    width: 45%;
+    max-width: 400px;
+    text-align: center;
+}
+.footer-top-r {
+    width: 42.5%;
+    max-width: 400px;
+}
+// < md
+@include mq-down(md) {
+    .footer-top-l,
+    .footer-top-r {
+        width: 100%;
+        max-width: 100%;
+    }
+    .footer-top-r {
+        margin-top: 20px;
+        text-align: center;
+    }
+}
+// .partition 仕切り線
+.partition {
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background: $C_BASE_SD;
+    background: linear-gradient(
+        to bottom,
+        rgba($C_BASE_SD, 0),
+        $C_BASE_SD 10%,
+        $C_BASE_SD 90%,
+        rgba($C_BASE_SD, 0)
+    );
+}
+// ロゴ
+.footer-logo {
+    @include fontsize($footer-fontsize);
+    color: $C_BASE_SD;
+    font-weight: normal;
+    line-height: $footer-fontsize + 10px;
+    img {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+// snsボタン
+.sns-buttons {
+    font-size: 0;
+    p {
+        color: $C_BASE_LT;
+        font-size: $footer-fontsize;
+    }
+}
+.sns-button {
+    display: inline-block;
+    height: 28px;
+    position: relative;
+
+    margin: 0 4px 10px 0;// 右,下
+    padding: 0 9px;
+    &:last-of-type {
+        margin-right: 0;
+    }
+
+    @include linkColors(#fff);
+    vertical-align: top;
+    border-radius: 4px;
+    cursor: pointer;
+    .fa {
+        position: relative;
+        top: 2px;
+        width: 16px;
+        font-size: 18px;
+    }
+    span {
+        display: inline-block;
+        margin-left: 5px;
+        font-size: 13px;
+        line-height: 28px;
+        zoom: 1;
+    }
+}
+// fbボタン
+.fb-button {
+    background-color: #4267b2;
+    &:hover {
+        background-color: #365899;
+    }
+}
+// twitterボタン
+.tw-button {
+    background-color: #1b95e0;
+    &:hover {
+        background-color: #0c7abf;
+    }
+}
+// lineボタン
+.line-button {
+    background-color: #00b900;
+    &:hover {
+        background-color: #008f00;
+    }
+    .icon {
+        position: relative;
+        top: 5px;
+        display: inline-block;
+        width: image-width('icon-line.png')/2;
+        height: image-height('icon-line.png')/2;
+        background: image-url('icon-line.png') no-repeat center/100%;
+    }
+}
+// 公式SNSボタン
+/*.fb-like,
+.line-button,
+.twitter-share-button {
+    margin: 0 4px 10px 0;
+    vertical-align: top;
+    display: inline-block !important;
+}*/
+
+// 最新情報（SNSタイムライン）のタイトル
+.title-news {
+    @extend .h3;
+    color: $C_BASE_LT;
+    margin-top: 0;
+    margin-bottom: 10px;
+    letter-spacing: .1em;
+    text-align: center;
+    font-weight: normal;
+}
+
+//----------------------------------------
+// フッター下部
+.footer-bottom {
+    padding: 30px 0;
+    background-color: $C_MAIN_DK;
+    text-align: center;
+    @include fontsize($footer-fontsize);
+    // < md
+    @include mq-down(md) {
+        padding: 20px 0;
+    }
+}
+
+// footer-nav
+.footer-nav {
+    margin-bottom: 20px;
+    li {
+        display: inline-block;
+        line-height: 1.8;
+
+        // >= md
+        @include mq-up(md) {
+            &:after,
+            &:first-of-type:before {
+                content: "|";
+                color: $C_BASE_SD;
+            }
+        }
+    }
+    a {
+        padding: 0 .5em;
+        @include linkColors(
+            $C_BASE_SD,
+            darken($C_BASE_SD,15%),
+            lighten($C_BASE_SD,5%)
+        );
+    }
+    // < md
+    @include mq-down(md) {
+        li {
+            display: block;
+        }
+        a {
+            display: inline-block;
+            margin-bottom: 10px;
+            li:last-child & {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+// copyright
+.copyright {
+    color: $C_BASE_SD;
+    @include text-shadow(0 1px lighten($C_MAIN, 10%));
+}

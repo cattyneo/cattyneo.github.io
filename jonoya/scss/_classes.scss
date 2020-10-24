@@ -1,0 +1,734 @@
+/*************** ユーティリティ ***************/
+
+// 左寄せ .left-xx
+@include responsive-up('.left') {
+    float: left;
+}
+// 右寄せ .right-xx
+@include responsive-up('.right') {
+    float: right;
+}
+
+// @extend .clearfix; もOK
+.clearfix {
+    @include clearfix;
+}
+
+// 改行しない
+.nowrap {
+    display: inline-block;
+    white-space: nowrap;
+}
+// PC
+@include mq-up(md) {
+    // 改行タグを無効
+    .pc-nobr {
+        & > br {
+            display: none !important;
+        }
+    }
+    // PCでは非表示
+    .sp-only {
+        display: none !important;
+    }
+}
+
+// SP
+@include mq-down(md) {
+    // 改行タグを無効
+    .sp-nobr {
+        & > br {
+            display: none !important;
+        }
+    }
+    // 中央寄せ
+    .sp-center {
+        text-align: center !important;
+    }
+    // SPでは非表示
+    .pc-only {
+        display: none !important;
+    }
+}
+
+// ラインマーカーのエフェクト
+.marker {
+    background: linear-gradient(transparent 60%, rgba($C_KEY, .7) 60%);
+}
+
+// inline-blockによる中央寄せブロック
+.inline-center {
+    font-size: 0;
+    text-align: center;
+}
+
+/*************** 共通クラス ***************/
+
+// 見出し
+.h2 {
+    margin-bottom: 40px;
+    @include fontsize(40px);
+}
+.h3 {
+    margin: 30px 0 30px 0;
+    @include fontsize(26px);
+}
+.h4 {
+    margin: 20px 0 15px 0;
+    @include fontsize(22px);
+}
+@include mq-down(md) {
+    .h2 {
+        margin-bottom: 30px;
+        @include fontsize(30px);
+    }
+    .h3 {
+        margin: 25px 0 20px 0;
+        @include fontsize(22px);
+    }
+    .h4 {
+        margin: 20px 0 15px 0;
+        @include fontsize(22px);
+    }
+}
+@include mq-down(sm) {
+    .h2 {
+        margin-bottom: 20px;
+        @include fontsize(24px);
+    }
+    .h3 {
+        margin: 20px 0 15px 0;
+        @include fontsize(20px);
+    }
+    .h4 {
+        margin: 15px 0 15px 0;
+        @include fontsize(18px);
+    }
+}
+
+.title small {
+    font-size: 66.666667%;
+    letter-spacing: -.05em;
+}
+// 大見出しのスタイル
+.title-lg {
+    //@extend %minchotitle;
+    @extend .h2;
+    font-weight: normal;
+    text-align: center;
+    letter-spacing: .2em;
+}
+.title-lg-dk {
+    @extend .title-lg;
+    color: $C_BASE_DK2;
+    @include text-shadow(
+        0 1px #fff,
+        0 0 15px rgba($C_BASE_DK, .1)
+    );
+}
+.title-lg-lt {
+    @extend .title-lg;
+    color: $C_BASE;
+    @include text-shadow(
+        0 -1px $C_MAIN,
+        0 0 15px rgba($C_BASE, .25)
+    );
+}
+// 中見出しのスタイル
+.title-md {
+    @extend .h3;
+    padding: .5em 0 .5em .5em;
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+    color: $C_BASE_DK;
+    font-weight: normal;
+    @include text-shadow(0 1px #fff);
+}
+// 小見出しのスタイル
+.title-sm {
+    @extend .h4;
+    color: $C_BASE_DK;
+    font-weight: normal;
+    @include text-shadow(0 1px #fff);
+}
+.title-md:first-child,
+.title-sm:first-child {
+    margin-top: 0;
+}
+
+// フレームつきの画像
+.img-frame {
+    display: block;
+    border: solid 5px #fff;
+    box-shadow: 0 2px 2px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08);
+}
+// 角丸の画像
+.img-radius {
+    border-radius: 5px;
+}
+
+// 大きな一区切り
+.part {
+    padding: 70px 0;
+}
+// 小さなセクション
+.sect {
+    margin-bottom: 50px;
+    small {
+        line-height: 1.5;
+    }
+}
+// 2分割
+.box-2 {
+    width: 47.5%;
+    text-align: center;
+    p {
+        // 説明テキストは左寄せ
+        text-align: left;
+    }
+    .title em {
+        // タイトル中のemタグを強調
+        font-weight: bold;
+        color: $C_KEY_DK;
+    }
+}
+// 3分割
+.box-3 {
+    width: 31.25%;
+    margin-right: 3.125%;
+    &:last-of-type {
+        margin-right: 0;
+    }
+}
+// < md
+@include mq-down(md) {
+    // 大きな一区切り
+    .part {
+        padding: 30px 0;
+    }
+    // セクション
+    .sect {
+        margin-bottom: 30px;
+    }
+    // 画像の左右にマージン
+    .sect img {
+        display: block;
+        margin: 0 auto 15px auto;
+    }
+    // 2分割
+    .box-2 {
+        width: 100%;
+        margin-bottom: 30px;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+        .title {
+            margin-top: 0;
+        }
+    }
+    // 3分割
+    .box-3 {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 30px;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}
+// < sm
+@include mq-down(sm) {
+    .sect img {
+        width: 100%;
+    }
+}
+// >= md
+@include mq-up(md) {
+    // 左右に分けるセクションレイアウト .left-md 等と併用
+    // タイトル、説明
+    .sect-lr-text {
+        width: percentage(7/12) - 3%;
+    }
+    // 画像
+    .sect-lr-img {
+        width: percentage(5/12);
+        box-sizing: content-box;
+    }
+}
+
+// display: flex
+.flex {
+    -js-display: flex;
+    @include display-flex;
+}
+// flex 均等配置
+.flex-between {
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
+    //@include align-items(center);
+}
+// flex 中央寄せ
+.flex-center {
+    @include justify-content(center);
+    @include flex-wrap(wrap);
+    //@include align-items(center);
+}
+// flex 2列
+.flex-2 {
+    // >= md 横２列
+    width: 48%;
+    margin-bottom: 30px;
+
+    // < md 縦並び
+    @include mq-down(md) {
+        -js-display: block;
+        display: block;
+
+        width: 100%;
+        margin: 20px auto 0 auto;
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+// flex 最大3列
+.flex-3 {
+    // >= md 横３列
+    // 幅960pxのコンテナで幅300px
+    width: 31.25%;
+    margin-bottom: 30px;
+
+    // < md 2列
+    @include mq-down(md) {
+        width: 48%;
+        margin-bottom: 20px;
+    }
+    // < sm 縦並び
+    @include mq-down(sm) {
+        -js-display: block;
+        display: block;
+
+        width: 100%;
+        margin: 0 auto 20px auto;
+    }
+}
+
+// 補足説明などの小さめテキスト
+.sub {
+    line-height: 1.5;
+    @include fontsize(14px);
+}
+
+// 薄いラインのdl
+.dl {
+    line-height: 1.5;
+    margin: 0;
+
+    dt {
+        margin-bottom: 3px;
+        padding-top: 10px;
+
+        @include fontsize(15px);
+        font-weight: bold;
+        &:first-of-type {
+            border-top: solid 1px $C_BASE_SD;
+        }
+
+        .fa {
+            margin-right: 5px;
+        }
+    }
+    dd {
+        @include fontsize(14px);
+        margin-left: 0;
+        padding-bottom: 10px;
+        border-bottom: solid 1px $C_BASE_SD;
+    }
+}
+
+// 普通のリスト
+$circle-size : 6px;
+ul.list {
+    list-style-type: none;
+    margin-bottom: 15px;
+    padding-left: 20px - $circle-size;
+    // >= md
+    @include mq-up(md) {
+        padding-left: 30px - $circle-size;
+    }
+    & > li {
+        @extend %defaultTextStyle;
+        display: list-item;
+        margin-bottom: $circle-size;
+    }
+    // リストの黒丸
+    & > li:before {
+        content: "";
+        display: inline-block;
+        width: $circle-size;
+        height: $circle-size;
+        //background-color: $C_KEY_DK;
+        background-color: $C_RED;
+        border-radius: 50%;
+
+        position: relative;
+        left: -14px;
+        top: -$circle-size / 2;
+    }
+}
+
+// ふきだし
+ul.list-bubble {
+    margin-bottom: 15px;
+
+    & > li {
+        position: relative;
+        display: list-item;
+        margin-bottom: 15px;
+        padding: 15px;
+
+        color: $C_BASE_DK;
+        line-height: 1.5;
+        // < md
+        @include mq-down(md) {
+            margin-right: 36px;
+        }
+
+        &, &:before, &:after {
+            border: solid 1px;
+            background-color: darken($C_BASE, 2%);
+            border-radius: 15px;
+        }
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -24px;
+            top: 12px;
+        }
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            right: -36px;
+            top: 20px;
+            @include mq-down(md) {
+                top: 8px;
+            }
+        }
+    }
+}
+// 入力フォーム
+.form {
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+    // タイトル
+    .form-title {
+        display: block;
+        margin-bottom: 5px;
+    }
+    // 必須/任意
+    .required,
+    .optional {
+        position: relative;
+        &:before {
+            display: inline-block;
+            padding: 6px;
+            margin-right: 6px;
+
+            @include fontsize(16px);
+            color: #fff;
+            border-radius: 4px;
+        }
+    }
+    .required:before {
+        content: "必須";
+        background: $C_RED;
+    }
+    .optional:before {
+        content: "任意";
+        background: desaturate($C_RED, 100%);
+    }
+}
+.result-success {
+    border: solid 1px $C_GREEN;
+    background: lighten($C_GREEN, 40%);
+    color: darken($C_GREEN, 20%);
+    border-radius: 2px;
+    padding: 1em;
+}
+.result-error {
+    border: solid 1px $C_RED;
+    background: lighten($C_RED, 40%);
+    color: darken($C_RED, 10%);
+    border-radius: 2px;
+    padding: 1em;
+}
+
+/* hoverすると拡大して背景を暗くする
+*  <div class="hover-zoom hover-shadow">
+*    <img src="~">
+*    <a href="~">~</a>
+*  </div>
+*/
+.hover-zoom {
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    border-radius: 5px;
+
+    img {
+        display: block;
+        width: 100%;
+        margin: 0;
+        @include transition(0.3s ease-out);
+        @include transform(scale(1)); // 拡大
+        @include backface-visibility(hidden); // ズレなくなるおまじない
+    }
+    a {
+        display: block;
+        position: absolute;
+        z-index: 11;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // 文字
+        text-decoration: none;
+        text-align: center;
+
+        // 中身の文字を上下中央揃え
+        padding: 8% 0;
+        -js-display: flex;
+        @include display-flex;
+        @include justify-content(center);
+        @include align-items(center);
+        @include flex-direction(column);
+
+        // 文字色と影
+        @include linkColors(#fff,#fff,#fff);
+        @include text-shadow(0 0 8px #000);
+
+        @include bg-rgba(#000, 0); // 透明化
+        @include opacity(0);
+        @include transition(0.3s ease-out);
+
+        span {
+            display: block;
+            line-height: 1.5;
+        }
+        small {
+            display: block;
+            font-size: 66.666667%;
+        }
+    }
+
+    @include mq-up(md) {
+        &:hover {
+            img {
+              @include transform(scale(1.1));
+            }
+            a {
+            	@include bg-rgba(#000, .35); // 透明化
+                @include opacity(1);
+            }
+        }
+    }
+}
+
+// hover時に影を拡大
+.hover-shadow {
+    box-shadow: 0 5px 10px rgba(#000, .2);
+    // >= md
+    @include mq-up(md) {
+        @include transition(.2s box-shadow ease-out);
+        &:hover {
+            box-shadow: 0 7px 15px rgba(#000, .3);
+        }
+    }
+}
+
+/*--------------------------------------------------------
+* 共通レイアウト
+*---------------------------------------------------------*/
+
+// セクション等を区切るフレーム
+.frame {
+    display: block;
+    margin-bottom: 50px;
+}
+// < md
+@include mq-down(md) {
+    .frame {
+        margin-bottom: 15px;
+    }
+}
+// 円アイコンとテキスト
+//$icon-circle-size   : 68px; // 円アイコンのサイズ
+//$icon-circle-button : 55px; // ボタンタイプの場合のアイコンサイズ
+$icon-circle        : 30px;
+$font-large         : 16px;
+$font-small         : 14px;
+
+// 円マークに対するアイコンサイズ
+$tel-reduct         : 0.70;
+$mail-reduct        : 0.58;
+
+@function width-to-font($width, $reduct) {
+    @return round( $width * $reduct / 2 ) * 2;
+}
+
+// .icon-box
+.icon-box {
+    display: block;
+    font-size: 0;
+}
+.icon-circle {
+    font-size: $fontSize;
+    .fa {
+        // 円とアイコン
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 6px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: inherit;
+        &:before {
+            position: relative;
+        }
+    }
+}
+.tel-list {
+    // tel-box-list 番号リスト
+    li {
+        margin-bottom: 15px;
+        font-size: 0;
+    }
+    span {
+        box-sizing: content-box;
+
+        display: inline-block;
+        width: 4em;
+
+        margin-right: .5em;
+        padding: 0 .5em;
+        border: solid 1px;
+
+        font-size: $font-large;
+        line-height: $icon-circle - 2px;// border分
+        border-radius: 2px;
+        letter-spacing: 0;
+        text-align: center;
+    }
+    img {
+        height: $icon-circle;
+    }
+    // < lg
+    @include mq-down(lg) {
+        span {
+            font-size: $font-small;
+        }
+    }
+}
+// 色設定
+.icon-box {
+    color: $C_BASE_LT;
+    .icon-circle {
+        .fa {
+            color: $C_MAIN;
+            background: $C_BASE_LT;
+        }
+    }
+}
+// 個別設定
+.tel-box-list {
+    .icon-circle {
+        line-height: $icon-circle;
+        .fa {
+            width: $icon-circle;
+            height: $icon-circle;
+            font-size: width-to-font($icon-circle, $tel-reduct);
+            &:before {
+                top: 1px;
+            }
+        }
+    }
+    margin-bottom: 30px;
+    // < md
+    @include mq-down(md) {
+        margin-bottom: 20px;
+    }
+}
+
+// 小さいリンクボタン
+// .link-buttons: リストで複数並べる
+// .link-button:  ボタン単品
+.link-buttons {
+    width: 100%;
+    p {
+        // 「詳細はこちら」
+        @include fontsize($fontSizeSP);
+        color: $C_BASE_DK;
+        margin-bottom: 8px;
+    }
+    ul {
+        font-size: 0;
+    }
+    li {
+        display: inline-block;
+        margin-right: 8px;
+        margin-bottom: 8px;
+        &:last-of-type {
+            margin-right: 0;
+        }
+    }
+}
+%link-button-style {
+    display: inline-block;
+    padding: 12px;
+    border-radius: 4px;
+    @include fontsize($fontSizeSP);
+    @include linkColors(#fff);
+}
+.link-buttons a,
+.link-button {
+    $col-normal: $C_MAIN_LT;
+    $col-hover : saturate(lighten($col-normal, 13%), 13%);
+
+    @extend %link-button-style;
+
+    background: $col-hover;
+    box-shadow: inset 0 0 2px 1px darken($col-hover, 5%);
+    // >= md
+    @include mq-up(md) {
+        background: $col-normal;
+        box-shadow: inset 0 0 2px 1px lighten($col-normal, 4%);
+        &:hover {
+            background: $col-hover;
+            box-shadow: inset 0 0 2px 1px darken($col-hover, 5%);
+        }
+    }
+}
+.link-button-lt {
+    $col-normal: saturate(lighten($C_MAIN_LT, 8%), 10%);
+    $col-hover : saturate(lighten($col-normal, 8%), 10%);
+
+    @extend %link-button-style;
+
+    background: $col-hover;
+    box-shadow: inset 0 0 2px 1px lighten($col-hover, 3%);
+    // >= md
+    @include mq-up(md) {
+        background: $col-normal;
+        box-shadow: inset 0 0 2px 1px darken($col-normal, 4%);
+        &:hover {
+            background: $col-hover;
+            box-shadow: inset 0 0 2px 1px lighten($col-hover, 3%);
+        }
+    }
+}
