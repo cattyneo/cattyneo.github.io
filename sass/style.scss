@@ -140,8 +140,27 @@ img {
 // section
 .section {
   padding: 4rem 0;
+
   &:nth-of-type(even) {
     background-color: $subColor;
+  }
+
+  &:first-of-type {
+    padding-top: 0;
+  }
+}
+
+// dl,dt,dd
+dl {
+  dt {
+    padding: 1.5rem 1.5rem .5rem;
+    color: #fff;
+    font-weight: bold;
+  }
+  dd {
+    padding: 0 1.5rem 1.5rem;
+    border-bottom: solid 1px rgba(#fff, .6);
+    letter-spacing: 0;
   }
 }
 
@@ -187,15 +206,15 @@ img {
 *--------------------------------------------------*/
 
 .header {
-  position: fixed;
+  /*position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 10;*/
+  padding: 2rem 0;
 
   .header-btn {
     margin-left: auto;
-    margin-top: 1rem;
 
     display: block;
     width: 44px;
@@ -215,11 +234,26 @@ img {
       color: $baseColor;
     }
   }
+  .header-btn-back {
+    display: block;
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+    line-height: 0;
+    color: rgba(255,255,255,0.85);
+
+    .label {
+      font-size: .75rem;
+      line-height: 1;
+      margin-top: .3rem;
+    }
+  }
 }
 
 /*--------------------------------------------------
 *  .intro
 *--------------------------------------------------*/
+
 .photo-intro {
   border-radius: 50%;
   margin: 2rem auto;
@@ -331,16 +365,6 @@ img {
 *--------------------------------------------------*/
 .section-history {
   background-image: linear-gradient(-45deg, darken($subColor, 3%), darken($baseColor, 5%));
-}
-.dl {
-  .dt {
-    padding: 1.5rem 1.5rem 1rem;
-  }
-  .dd {
-    padding: 0 1.5rem 1.5rem;
-    border-bottom: solid 1px rgba(#fff, .6);
-    letter-spacing: 0;
-  }
 }
 
 /*--------------------------------------------------
