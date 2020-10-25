@@ -147,11 +147,11 @@
 
 <?php if ( is_home() || is_page('access') ) : ?>
     <!-- google maps -->
-    <script defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyBaEYPRSRQlmufn0LKkrEhdV8VUIym-pd4"></script>
+    <script defer src="//maps.googleapis.com/maps/api/js"></script>
     <script defer src="js/maps.js?170306-1"></script>
 <?php endif; if ( is_page('seminar') ) : ?>
     <!-- google maps -->
-    <script defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyBaEYPRSRQlmufn0LKkrEhdV8VUIym-pd4"></script>
+    <script defer src="//maps.googleapis.com/maps/api/js"></script>
     <script defer src="js/maps.js?170306-1"></script>
     <script defer src="js/maps-semi.js?170306-1"></script>
 <?php endif; ?>
