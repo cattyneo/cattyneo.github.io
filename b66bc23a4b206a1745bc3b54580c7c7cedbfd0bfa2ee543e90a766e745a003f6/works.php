@@ -42,11 +42,11 @@ if (!isset($works[$id])) {
                 <div class="subtitle"><?= h($works[$id]['date']) ?></div>
             </h2>
 
-            <div class="workdetail-image">
+            <div>
                 <img class="works" src="./images/works_main_<?= h($id) ?>.png" alt="<?= h($works[$id]['title']) ?>">
             </div>
 
-            <dl class="dl">
+            <dl class="dl dl-sm">
 <?php if (isset($works[$id]['url'])) : ?>
                 <dt class="dt">URL</dt>
                 <dd class="dd"><a class="link" href="<?= $works[$id]['url'] ?>" target="_blank"><?= $works[$id]['url'] ?></a></dd>
