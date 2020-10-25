@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Enter Password</title>
+    <script type="text/javascript" src="sha256.js"></script>
+    <style>
+        html,body {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            background-color: hsl(236, 30%, 31%);
+            color: #fff;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #message {
+            margin: 0 0 1rem 0;
+            font-size: 1.25rem;
+        }
+        #password {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: .25rem .5rem;
+            border-radius: .5rem;
+            height: 1.5rem;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            border: solid 2px hsl(240, 48%, 12%);
+        }
+        #form {
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 1rem;
+            margin: 0 auto;
+
+            text-align: center;
+        }
+    </style>
+  </head>
+  <body>
+    <form id="form">
+        <p id="message">パスワードを入力してください</p>
+        <input type="password" placeholder="password" id="password">
+    </form>
+    <script>
+      function hash(text) {
+        const sha = new jsSHA('SHA-256', 'TEXT');
+        sha.update(text);
+        return sha.getHash('HEX');
+      }
+      function auth(password) {
+        const url = hash(password);
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+        xhr.onload = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            window.location = url;
+          } else {
+            const message = document.getElementById('message');
+            const input = document.getElementById('password');
+            message.innerHTML = 'パスワードが違います。再度お試しください。';
+            input.value = '';
+          }
+        };
+        xhr.onerror = function () {
+          const message = document.getElementById('message');
+          message.innerHTML = 'エラーが発生しました。開発者までお問い合わせください。';
+        };
+      }
+      const form = document.getElementById('form');
+      form.addEventListener('submit', function (event) {
+        const password = document.getElementById('password').value;
+        auth(password);
+        event.preventDefault();
+      });
+    </script>
+  </body>
+</html>
