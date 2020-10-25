@@ -311,6 +311,8 @@ dl {
 
 // works alt style
 .box-group.box-group-works {
+  margin-bottom: 1rem;
+  
   .box-group-item {
     width: 100%;
     overflow: hidden;
@@ -322,8 +324,8 @@ dl {
   .box-group-image {
     display: block;
     transition: transform .2s ease-out;
-    margin: 5% auto;
-    width: 90%;
+    margin: 3% auto;
+    width: 93%;
   }
   .box-group-inner {
     position: absolute;
