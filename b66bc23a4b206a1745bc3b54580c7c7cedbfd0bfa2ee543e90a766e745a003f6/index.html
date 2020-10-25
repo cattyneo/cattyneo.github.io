@@ -11,14 +11,14 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container d-flex">
-            <a href="#contact" id="header-btn-contact" class="header-btn"><i aria-label="お問い合わせ" class="far fa-envelope"></i></a>
-        </div>
-    </header>
-
     <section id="intro" class="section section-intro">
-        <div class="container text-center">
+        <header class="header">
+            <div class="container d-flex">
+                <a href="#contact" id="header-btn-contact" class="header-btn"><i aria-label="お問い合わせ" class="far fa-envelope"></i></a>
+            </div>
+        </header>
+        
+        <div class="container container-sm text-center">
             <h1 class="h1">
                 <div class="subtitle">Web Developer</div>
                 <div>Naohide Takahashi</div>
@@ -28,15 +28,22 @@
                 埼玉県在住、32歳、一児の父。<br>
                 “広くて深い何でも屋”を目指しています。
             </p>
-            <dl>
-                <dt>趣味</dt>
-                <dd>プログラミング, リアル脱出ゲーム, Jazz鑑賞</dd>
+            <dl class="text-left dl dl-sm">
+                <dt class="dt">趣味</dt>
+                <dd class="dd"><span class="nowrap">プログラミング,</span>
+                    <span class="nowrap">リアル脱出ゲーム,</span>
+                    <span class="nowrap">Jazz鑑賞</span></dd>
 
-                <dt>保有資格</dt>
-                <dd>基本情報技術者, Japan MENSA 会員, 実用英語技能検定2級, 少林寺拳法二段</dd>
+                <dt class="dt">保有資格</dt>
+                <dd class="dd"><span class="nowrap">基本情報技術者,</span>
+                    <span class="nowrap">Japan MENSA 会員,</span>
+                    <span class="nowrap">実用英語技能検定2級,</span>
+                    <span class="nowrap">少林寺拳法二段</span></dd>
 
-                <dt>学習中の技術</dt>
-                <dd>Vue.js, Laravel, Google Cloud Platform</dd>
+                <dt class="dt">学習中の技術</dt>
+                <dd class="dd"><span class="nowrap">Vue.js,</span>
+                    <span class="nowrap">Laravel,</span>
+                    <span class="nowrap">Google Cloud Platform</span></dd>
             </dl>
         </div>
     </section>

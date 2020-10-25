@@ -46,20 +46,20 @@ if (!isset($works[$id])) {
                 <img class="works" src="./images/works_main_<?= h($id) ?>.png" alt="<?= h($works[$id]['title']) ?>">
             </div>
 
-            <dl>
+            <dl class="dl">
 <?php if (isset($works[$id]['url'])) : ?>
-                <dt>URL</dt>
-                <dd><a class="link" href="<?= $works[$id]['url'] ?>" target="_blank"><?= $works[$id]['url'] ?></a></dd>
+                <dt class="dt">URL</dt>
+                <dd class="dd"><a class="link" href="<?= $works[$id]['url'] ?>" target="_blank"><?= $works[$id]['url'] ?></a></dd>
 <?php endif; ?>
 
-                <dt>使用技術</dt>
-                <dd><?= $works[$id]['skills'] ?></dd>
+                <dt class="dt">使用技術</dt>
+                <dd class="dd"><?= $works[$id]['skills'] ?></dd>
 
-                <dt>担当箇所</dt>
-                <dd><?= $works[$id]['roles'] ?></dd>
+                <dt class="dt">担当箇所</dt>
+                <dd class="dd"><?= $works[$id]['roles'] ?></dd>
 
-                <dt>詳細</dt>
-                <dd><?= $works[$id]['description'] ?></dd>
+                <dt class="dt">詳細</dt>
+                <dd class="dd"><?= $works[$id]['description'] ?></dd>
             </dl>
         </div>
     </section>
