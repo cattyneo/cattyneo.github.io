@@ -24,15 +24,14 @@ if (!isset($works[$id])) {
     <meta name="viewport" content="widdt=device-widdt, initial-scale=1">
     <title>WORKS | Web Developer - Naohide Takahashi</title>
     <meta name="description" content="Web開発者 高橋直秀のポートフォリオサイトです。">
-    <meta name="keywords" content="Web, デザイン, デザイナー, ポートフォリオ, Web制作">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <header class="header">
         <div class="container d-flex">
-            <a href="index.php" class="header-btn-back"><i aria-label="戻る" class="fas fa-arrow-left"></i><div class="label font-alt">BACK</div></a>
-            <a href="index.php#contact" id="header-btn-contact" class="header-btn"><i aria-label="お問い合わせ" class="far fa-envelope"></i></a>
+            <a href="index.html" class="header-btn-back"><i aria-label="戻る" class="fas fa-arrow-left"></i><div class="label font-alt">BACK</div></a>
+            <a href="index.html#contact" id="header-btn-contact" class="header-btn"><i aria-label="お問い合わせ" class="far fa-envelope"></i></a>
         </div>
     </header>
 
@@ -44,14 +43,14 @@ if (!isset($works[$id])) {
             </h2>
 
             <div class="workdetail-image">
-                <img class="works" src="./images/works_main_<?= h($id) ?>.jpg" alt="<?= h($works[$id]['title']) ?>">
+                <img class="works" src="./images/works_main_<?= h($id) ?>.png" alt="<?= h($works[$id]['title']) ?>">
             </div>
 
             <dl>
-                <?php if (isset($works[$id]['url'])) : ?>
-                    <dt>URL</dt>
-                    <dd><a href="<?= $works[$id]['url'] ?>" target="_blank"><?= $works[$id]['url'] ?></a></dd>
-                <?php endif; ?>
+<?php if (isset($works[$id]['url'])) : ?>
+                <dt>URL</dt>
+                <dd><a class="link" href="<?= $works[$id]['url'] ?>" target="_blank"><?= $works[$id]['url'] ?></a></dd>
+<?php endif; ?>
 
                 <dt>使用技術</dt>
                 <dd><?= $works[$id]['skills'] ?></dd>

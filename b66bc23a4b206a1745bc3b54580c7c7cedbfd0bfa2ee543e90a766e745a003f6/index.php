@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Web Developer - Naohide Takahashi</title>
     <meta name="description" content="Web開発者 高橋直秀のポートフォリオサイトです。">
-    <meta name="keywords" content="Web, デザイン, デザイナー, ポートフォリオ, Web制作">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -55,7 +54,7 @@
                 <li class="box-group-item">
                     <i aria-hidden="true" class="skill-icon fas fa-code"></i>
                     <h3 class="h3 h3-skills">Coding</h3>
-                    <div class="text-left">HTML5, CSS3, Sass, Bootstrap, Github</div>
+                    <div class="text-left">HTML5, CSS3, Sass, Bootstrap</div>
                 </li>
 
                 <li class="box-group-item">
@@ -65,8 +64,8 @@
                 </li>
                 <li class="box-group-item">
                     <i aria-hidden="true" class="skill-icon fab fa-github"></i>
-                    <h3 class="h3 h3-skills">Github</h3>
-                    <div class="text-left">Github (command line)</div>
+                    <h3 class="h3 h3-skills">Git</h3>
+                    <div class="text-left">Github, Git(command line)</div>
                 </li>
                 <li class="box-group-item">
                     <i aria-hidden="true" class="skill-icon fas fa-server"></i>
@@ -139,7 +138,7 @@
                     </h3>
                 </dt>
                 <dd class="dd">
-                以前から憧れていたゲーム業界に、業務委託社員として参画。<br>
+                以前から憧れていたゲーム業界への転職を志し、ゲーム制作会社に業務委託として参画。<br>
                 ゲームプランナーとして、ソーシャルゲーム新規開発、運用に携わる。<br>
                 企画・仕様書作成、UI設計、仕様策定、ディレクション、Webサイト保守/運用等を担当。
                 </dd>
