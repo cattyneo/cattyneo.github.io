@@ -1,58 +1,5 @@
 <?php
-
-// [id => work]
-// skills: 使用技術
-// roles: 担当箇所
-$works = [
-    1 => [
-        'title' => '株式会社T様 コーポレートサイト',
-        'date' => '2020.08',
-        'url' => '',
-        'skills' => [],
-        'roles' => [],
-        'description' => '',
-    ],
-    2 => [
-        'title' => '株式会社O様 コーポレートサイト',
-        'date' => '2020.03',
-        'url' => '',
-        'skills' => [],
-        'roles' => [],
-        'description' => '',
-    ],
-    3 => [
-        'title' => '株式会社M様 コーポレートサイト(デザイン)',
-        'date' => '2020.02',
-        'url' => '',
-        'skills' => [],
-        'roles' => [],
-        'description' => '',
-    ],
-    4 => [
-        'title' => '株式会社R様 コーポレートサイト',
-        'date' => '2017.09',
-        'url' => '',
-        'skills' => [],
-        'roles' => [],
-        'description' => '',
-    ],
-    5 => [
-        'title' => '株式会社J様 コーポレートサイト',
-        'date' => '2017.06',
-        'url' => '',
-        'skills' => [],
-        'roles' => [],
-        'description' => '',
-    ],
-    6 => [
-        'title' => '株式会社M様 コーポレートサイト',
-        'date' => '2017.04',
-        'url' => '',
-        'skills' => [],
-        'roles' => [],
-        'description' => '',
-    ],
-];
+    require_once('common.php')
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -152,7 +99,7 @@ $works = [
         <div class="box-group box-group-works text-center">
             <?php foreach($works as $index => $work) : ?>
             <div class="box-group-item">
-                <a class="box-group-inner" href="<?= "/works.php?id={$index}" ?>">
+                <a class="box-group-inner" href="<?= "./works.php?id={$index}" ?>">
                     <h3 class="h3 h3-works">
                         <div><?= $work['title'] ?></div>
                         <div class="subtitle"><?= $work['date'] ?></div>
@@ -180,8 +127,9 @@ $works = [
                     </h3>
                 </dt>
                 <dd class="dd">
-                知人のWeb/アプリ制作会社CEOに勧められ、Webデザイナーとして制作請負を開始。並行して Tech Academy Webデザインコースにて学習。<br>
-                2017年から個人事業主として独立し、単価交渉、契約から企画、デザイン、コーディング、運用サポート、コンサルまで個人で担当する。
+                知人のWeb/アプリ制作会社CEOに勧められ、Webデザイナーとして制作請負を開始。<br>
+                並行して Tech Academy Webデザインコースにて学習。<br>
+                2017年から個人事業主として独立。単価交渉、契約から企画、デザイン、コーディング、運用サポート、コンサルまで個人で担当する。
                 </dd>
 
                 <dt class="dt">
