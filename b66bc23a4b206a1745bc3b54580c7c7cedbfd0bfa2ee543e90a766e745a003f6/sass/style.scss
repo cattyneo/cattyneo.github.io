@@ -75,6 +75,9 @@ a {
     text-decoration: none;
   }
 }
+p {
+  margin-bottom: 1rem;
+}
 
 img {
   max-width: 100%;
@@ -312,7 +315,7 @@ dl {
 // works alt style
 .box-group.box-group-works {
   margin-bottom: 1rem;
-  
+
   .box-group-item {
     width: 100%;
     overflow: hidden;
