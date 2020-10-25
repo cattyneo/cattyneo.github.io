@@ -322,6 +322,8 @@ dl {
   .box-group-image {
     display: block;
     transition: transform .2s ease-out;
+    margin: 5% auto;
+    width: 90%;
   }
   .box-group-inner {
     position: absolute;
